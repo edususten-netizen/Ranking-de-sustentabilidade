@@ -1,0 +1,6 @@
+{
+  "name": "Edu Susten - Ranking de Sustentabilidade Escolar",
+  "description": "Plataforma oficial de classificação e ranking de sustentabilidade para escolas de Ensino Fundamental e Médio inspirada no UI GreenMetric.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

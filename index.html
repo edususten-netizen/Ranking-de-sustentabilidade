@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edu Susten - Plataforma de Avaliação e Ranking de Sustentabilidade Escolar</title>
+    <meta name="description" content="Plataforma de classificação e ranking de sustentabilidade para escolas de Ensino Fundamental e Médio inspirada no UI GreenMetric." />
+    <meta property="og:title" content="Edu Susten - Ranking de Sustentabilidade Escolar" />
+    <meta property="og:description" content="Plataforma de avaliação ambiental e certificação para escolas de Ensino Fundamental e Médio." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              verde: {
+                primary: '#118552',
+                vibrant: '#22a267',
+                dark: '#177147',
+                light: '#eef8f3',
+              },
+              azul: {
+                primary: '#0a284f',
+                slate: '#2f4a69',
+                light: '#edf3fa',
+              },
+              ouro: {
+                DEFAULT: '#cca549',
+                light: '#f5e4b3',
+                dark: '#a07c2c',
+              }
+            },
+            fontFamily: {
+              montserrat: ['Montserrat', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        color: #1e293b;
+        background-color: #f8faf8;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#f8faf8] text-slate-800 antialiased selection:bg-[#118552] selection:text-white">
+
+    <!-- 1. NAVEGAÇÃO (NAVBAR) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <!-- Logo Slot -->
+          <div id="logo-navbar-slot">
+            <a href="#inicio" class="flex items-center gap-3">
+              <span class="text-2xl font-black text-[#0a284f] font-montserrat">Edu<span class="text-[#118552]">Susten</span></span>
+            </a>
+          </div>
+
+          <!-- Links Desktop com Rolagem Suave -->
+          <nav class="hidden xl:flex items-center space-x-6 text-xs font-semibold text-slate-700">
+            <a href="#inicio" class="hover:text-[#118552] transition-colors py-2">Início</a>
+            <a href="#sobre" class="hover:text-[#118552] transition-colors py-2">Sobre o Projeto</a>
+            <a href="#categorias" class="hover:text-[#118552] transition-colors py-2">Categorias</a>
+            <a href="#formulario" class="hover:text-[#118552] transition-colors py-2">Formulário de Avaliação</a>
+            <a href="#ranking-fundamental" class="hover:text-[#118552] transition-colors py-2">Ranking Fundamental</a>
+            <a href="#ranking-medio" class="hover:text-[#118552] transition-colors py-2">Ranking Médio</a>
+          </nav>
+
+          <!-- Botão de Ação -->
+          <div class="hidden sm:flex items-center gap-3">
+            <a href="#formulario" class="px-5 py-2.5 bg-[#118552] hover:bg-[#0d6b41] text-white text-xs font-bold rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-2">
+              <i data-lucide="clipboard-check" class="w-4 h-4"></i>
+              <span>Participar da Avaliação</span>
+            </a>
+          </div>
+
+          <!-- Botão Menu Mobile -->
+          <div class="flex xl:hidden">
+            <button id="mobile-menu-btn" class="p-2 text-slate-600 hover:text-[#0a284f] rounded-lg transition-colors cursor-pointer" aria-label="Abrir menu">
+              <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu Mobile Dropdown -->
+      <div id="mobile-menu" class="hidden xl:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 shadow-lg">
+        <a href="#inicio" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Início</a>
+        <a href="#sobre" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Sobre o Projeto</a>
+        <a href="#categorias" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Categorias</a>
+        <a href="#formulario" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Formulário de Avaliação</a>
+        <a href="#ranking-fundamental" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Ranking Fundamental</a>
+        <a href="#ranking-medio" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Ranking Médio</a>
+        <div class="pt-3 border-t border-slate-100">
+          <a href="#formulario" class="w-full py-3 bg-[#118552] text-white text-center text-sm font-bold rounded-lg flex items-center justify-center gap-2">
+            <i data-lucide="clipboard-check" class="w-4 h-4"></i>
+            <span>Participar da Avaliação</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      
+      <!-- 2. TELA INICIAL (HERO SECTION) -->
+      <section id="inicio" class="relative overflow-hidden bg-gradient-to-b from-[#eef8f3] via-[#f8faf8] to-[#f8faf8] pt-12 pb-20 lg:pt-16 lg:pb-28 border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-6">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#118552]/10 border border-[#118552]/20 text-[#118552] text-xs font-bold uppercase tracking-wider">
+                <i data-lucide="leaf" class="w-4 h-4 text-[#118552]"></i>
+                <span>Inspirado no Modelo Global UI GreenMetric</span>
+              </div>
+
+              <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a284f] font-montserrat tracking-tight leading-tight">
+                Transformação Sustentável no <span class="text-[#118552]">Ensino Fundamental</span> e <span class="text-[#2f4a69]">Médio</span>
+              </h1>
+
+              <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                A plataforma <strong>Edu Susten</strong> mede, avalia e ranqueia o compromisso socioambiental das escolas brasileiras. Reconhecemos instituições que transformam práticas cotidianas em legado ecológico para as novas gerações.
+              </p>
+
+              <!-- Botões CTA -->
+              <div class="flex flex-wrap items-center gap-4 pt-2">
+                <a href="#formulario" class="px-6 py-3.5 bg-[#118552] hover:bg-[#0d6b41] text-white text-sm font-bold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-2 group">
+                  <span>Participar da Avaliação</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                </a>
+                <a href="#ranking-fundamental" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-[#0a284f] border border-slate-300 text-sm font-bold rounded-xl shadow-xs hover:shadow-sm transition-all flex items-center gap-2">
+                  <i data-lucide="bar-chart-3" class="w-4 h-4 text-[#cca549]"></i>
+                  <span>Ver Ranking Atual</span>
+                </a>
+              </div>
+
+              <!-- Destaque Rápido -->
+              <div class="pt-6 border-t border-slate-200/70 grid grid-cols-3 gap-4">
+                <div>
+                  <div class="text-xl sm:text-2xl font-black text-[#0a284f] font-montserrat">5</div>
+                  <div class="text-xs text-slate-500 font-medium">Indicadores Chave</div>
+                </div>
+                <div>
+                  <div class="text-xl sm:text-2xl font-black text-[#118552] font-montserrat">1.000</div>
+                  <div class="text-xs text-slate-500 font-medium">Pontos Auditados</div>
+                </div>
+                <div>
+                  <div class="text-xl sm:text-2xl font-black text-[#cca549] font-montserrat">100%</div>
+                  <div class="text-xs text-slate-500 font-medium">Gratuito & Educativo</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Imagens e Selo Hero -->
+            <div class="lg:col-span-5 flex flex-col items-center justify-center">
+              <div class="relative w-full max-w-sm lg:max-w-md bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200/80 text-center">
+                <div class="w-52 sm:w-60 mx-auto mb-4 drop-shadow-md transition-transform duration-300 hover:scale-105">
+                  <div id="selo-hero-slot">
+                    <img src="/selo-edu-susten.png" alt="Selo Oficial EduSusten - Certificação de Escola Sustentável" class="w-full h-auto object-contain select-none rounded-full" />
+                  </div>
+                </div>
+                <div class="inline-block px-3 py-1 bg-amber-50 text-[#cca549] border border-amber-200 rounded-md text-xs font-bold tracking-wide uppercase mb-2">
+                  Certificação Oficial
+                </div>
+                <h3 class="text-lg font-bold text-[#0a284f] font-montserrat">
+                  Escola Certificada em Sustentabilidade
+                </h3>
+                <p class="text-xs text-slate-500 mt-1">
+                  Reconhecimento institucional para escolas que atingem os padrões de excelência ambiental.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. SOBRE O PROJETO -->
+      <section id="sobre" class="py-20 bg-white border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="max-w-3xl mx-auto text-center mb-16">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#118552]">Missão & Visão</span>
+            <h2 class="text-3xl font-extrabold text-[#0a284f] font-montserrat mt-2">
+              Sobre o Projeto Edu Susten
+            </h2>
+            <p class="text-slate-600 mt-4 text-base leading-relaxed">
+              O <strong>Edu Susten</strong> foi criado para adaptar a metodologia consolidada do <em>UI GreenMetric World University Rankings</em> à realidade prática, pedagógica e estrutural das escolas de Ensino Fundamental e Médio.
+            </p>
+          </div>
+
+          <!-- Pilares da Iniciativa -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            
+            <div class="bg-[#f8faf8] rounded-2xl p-8 border border-slate-200/80 hover:border-[#118552]/40 transition-all duration-300 shadow-xs hover:shadow-md">
+              <div class="w-14 h-14 rounded-xl bg-[#118552]/10 text-[#118552] flex items-center justify-center mb-6">
+                <i data-lucide="globe-2" class="w-7 h-7"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#0a284f] font-montserrat mb-3">Impacto Local</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Transformação concreta do espaço escolar e seu entorno imediato, incentivando hortas comunitárias, reciclagem ativa, conservação hídrica e eficiência energética palpável.
+              </p>
+            </div>
+
+            <div class="bg-[#f8faf8] rounded-2xl p-8 border border-slate-200/80 hover:border-[#2f4a69]/40 transition-all duration-300 shadow-xs hover:shadow-md">
+              <div class="w-14 h-14 rounded-xl bg-[#2f4a69]/10 text-[#2f4a69] flex items-center justify-center mb-6">
+                <i data-lucide="graduation-cap" class="w-7 h-7"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#0a284f] font-montserrat mb-3">Educação Transformadora</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Inserção transversal da sustentabilidade nos planos de aula, conectando ciências, matemática, artes e cidadania aos Objetivos de Desenvolvimento Sustentável (ODS) da ONU.
+              </p>
+            </div>
+
+            <div class="bg-[#f8faf8] rounded-2xl p-8 border border-slate-200/80 hover:border-[#cca549]/50 transition-all duration-300 shadow-xs hover:shadow-md">
+              <div class="w-14 h-14 rounded-xl bg-[#cca549]/15 text-[#a07c2c] flex items-center justify-center mb-6">
+                <i data-lucide="users-2" class="w-7 h-7"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#0a284f] font-montserrat mb-3">Conscientização Comunitária</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Aproximação das famílias, colaboradores, alunos e lideranças do bairro, multiplicando a mentalidade sustentável para além dos portões da escola.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Níveis de Certificação -->
+          <div class="bg-gradient-to-r from-[#0a284f] to-[#177147] text-white rounded-2xl p-8 lg:p-10 shadow-lg">
+            <div class="max-w-3xl">
+              <span class="text-xs font-bold text-[#cca549] uppercase tracking-wider">Critério de Certificação</span>
+              <h3 class="text-2xl font-bold font-montserrat text-white mt-1 mb-4">
+                Selos e Reconhecimento por Pontuação (Total de 1.000 pts)
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div class="bg-white/10 backdrop-blur-xs rounded-xl p-4 border border-white/10">
+                  <div class="text-base font-bold text-[#cca549] flex items-center gap-1.5">
+                    <span>🥇 Selo Ouro</span>
+                  </div>
+                  <div class="text-2xl font-black mt-1">900 a 1.000 pts</div>
+                  <div class="text-xs text-emerald-100/80 mt-1">Excelência máxima e inovação contínua</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-xs rounded-xl p-4 border border-white/10">
+                  <div class="text-base font-bold text-slate-200 flex items-center gap-1.5">
+                    <span>🥈 Selo Prata</span>
+                  </div>
+                  <div class="text-2xl font-black mt-1">800 a 899 pts</div>
+                  <div class="text-xs text-emerald-100/80 mt-1">Sistemas avançados e gestão sólida</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-xs rounded-xl p-4 border border-white/10">
+                  <div class="text-base font-bold text-amber-200 flex items-center gap-1.5">
+                    <span>🥉 Selo Bronze</span>
+                  </div>
+                  <div class="text-2xl font-black mt-1">700 a 799 pts</div>
+                  <div class="text-xs text-emerald-100/80 mt-1">Boas práticas em consolidação</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. CATEGORIAS DE AVALIAÇÃO E METODOLOGIA -->
+      <section id="categorias" class="py-20 bg-[#f8faf8] border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="max-w-3xl mx-auto text-center mb-16">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#118552]">Metodologia Científica & Prática</span>
+            <h2 class="text-3xl font-extrabold text-[#0a284f] font-montserrat mt-2">
+              Os 5 Indicadores Principais de Sustentabilidade
+            </h2>
+            <p class="text-slate-600 mt-4 text-base leading-relaxed">
+              Inspirado no UI GreenMetric, o sistema simplificado do Edu Susten avalia a performance das escolas através de 5 dimensões com pesos equilibrados (20% cada, somando 1.000 pontos).
+            </p>
+          </div>
+
+          <!-- Grid de Cartões dos 5 Indicadores (gerado via JS) -->
+          <div id="grid-categorias" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+        </div>
+      </section>
+
+      <!-- 5. ABA DO FORMULÁRIO DE AVALIAÇÃO -->
+      <section id="formulario" class="py-20 bg-white border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="max-w-3xl mx-auto text-center mb-12">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#118552]">Inscrição & Diagnóstico Gratuito</span>
+            <h2 class="text-3xl font-extrabold text-[#0a284f] font-montserrat mt-2">
+              Formulário Oficial de Avaliação Escolar
+            </h2>
+            <p class="text-slate-600 mt-4 text-base leading-relaxed">
+              Para ingressar no Ranking Edu Susten e pleitear o Selo de Escola Sustentável, a equipe gestora ou pedagógica da escola deve preencher o questionário oficial abaixo. As respostas são auditadas para emissão do parecer.
+            </p>
+          </div>
+
+          <!-- Contêiner do Formulário Google Forms -->
+          <div class="max-w-4xl mx-auto bg-[#f8faf8] rounded-2xl border border-slate-200/80 p-4 sm:p-6 shadow-sm">
+            
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-200">
+              <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                <i data-lucide="file-text" class="w-4 h-4 text-[#118552]"></i>
+                <span>Questionário de Autoavaliação Edu Susten</span>
+              </div>
+              <!-- Link auxiliar em caso de preferência por tela cheia -->
+              <a 
+                href="https://docs.google.com/forms/d/e/1FAIpQLSejpWBCPQayd1a3e0SbymB-EC3N2l2xsNIVGRbnSE6I_zjkDQ/viewform?usp=publish-editor" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="text-xs font-bold text-[#118552] hover:text-[#0a284f] flex items-center gap-1.5 underline">
+                <span>Abrir questionário em nova aba</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+
+            <!-- IFRAME DO GOOGLE FORMS -->
+            <!-- 
+              LINK DO FORMULÁRIO DO GOOGLE FORMS:
+              Substitua o atributo 'src' abaixo pelo seu link definitivo de visualização pública quando desejar.
+            -->
+            <div class="relative w-full overflow-hidden rounded-xl bg-white shadow-xs border border-slate-200 min-h-[640px] sm:min-h-[720px]">
+              <iframe 
+                src="https://docs.google.com/forms/d/e/1FAIpQLSejpWBCPQayd1a3e0SbymB-EC3N2l2xsNIVGRbnSE6I_zjkDQ/viewform?embedded=true" 
+                width="100%" 
+                height="750" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0"
+                class="w-full h-full min-h-[720px]"
+                title="Formulário de Avaliação Edu Susten">
+                Carregando formulário de avaliação...
+              </iframe>
+            </div>
+
+            <div class="mt-4 text-center text-xs text-slate-500">
+              Dúvidas no preenchimento? Entre em contato pelo e-mail: <strong>edususten@gmail.com</strong>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 6. RANKING DE ESCOLAS DE ENSINO FUNDAMENTAL -->
+      <section id="ranking-fundamental" class="py-20 bg-[#f8faf8] border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="max-w-3xl mx-auto text-center mb-10">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#118552]">Ciclo 2026</span>
+            <h2 class="text-3xl font-extrabold text-[#0a284f] font-montserrat mt-2">
+              Ranking de Sustentabilidade · Ensino Fundamental
+            </h2>
+            <p class="text-slate-600 mt-3 text-base leading-relaxed">
+              Classificação geral das escolas de Ensino Fundamental avaliadas nos 5 indicadores do Edu Susten.
+            </p>
+          </div>
+
+          <!-- Módulo Destaque Top #1 Fundamental -->
+          <div id="top1-fundamental-slot" class="mb-8"></div>
+
+          <!-- Estatísticas Gerais Fundamental -->
+          <div id="stats-fundamental-slot"></div>
+
+          <!-- Barra de Busca e Filtros Fundamental -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <!-- Campo de Busca em Tempo Real -->
+            <div class="relative w-full sm:w-80">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input 
+                type="text" 
+                id="busca-fundamental" 
+                placeholder="Buscar escola, cidade ou UF..." 
+                class="w-full pl-10 pr-4 py-2 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#118552] focus:border-transparent"
+              />
+            </div>
+
+            <!-- Filtros por Nível/Selo -->
+            <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto p-1 bg-slate-100 rounded-lg">
+              <button data-filtro-fundamental="todos" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-[#118552] text-white transition-colors cursor-pointer whitespace-nowrap">
+                Todas
+              </button>
+              <button data-filtro-fundamental="ouro" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer whitespace-nowrap">
+                Selo Ouro
+              </button>
+              <button data-filtro-fundamental="prata" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer whitespace-nowrap">
+                Selo Prata
+              </button>
+              <button data-filtro-fundamental="bronze" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer whitespace-nowrap">
+                Selo Bronze
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Tabela Responsiva Fundamental -->
+          <div id="tabela-fundamental-slot"></div>
+
+        </div>
+      </section>
+
+      <!-- 7. RANKING DE ESCOLAS DE ENSINO MÉDIO -->
+      <section id="ranking-medio" class="py-20 bg-white border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="max-w-3xl mx-auto text-center mb-10">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#0a284f]">Ciclo 2026</span>
+            <h2 class="text-3xl font-extrabold text-[#0a284f] font-montserrat mt-2">
+              Ranking de Sustentabilidade · Ensino Médio
+            </h2>
+            <p class="text-slate-600 mt-3 text-base leading-relaxed">
+              Classificação geral dos colégios de Ensino Médio e institutos técnicos avaliados pela metodologia Edu Susten.
+            </p>
+          </div>
+
+          <!-- Módulo Destaque Top #1 Médio -->
+          <div id="top1-medio-slot" class="mb-8"></div>
+
+          <!-- Estatísticas Gerais Médio -->
+          <div id="stats-medio-slot"></div>
+
+          <!-- Barra de Busca e Filtros Médio -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <!-- Campo de Busca em Tempo Real -->
+            <div class="relative w-full sm:w-80">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input 
+                type="text" 
+                id="busca-medio" 
+                placeholder="Buscar escola, cidade ou UF..." 
+                class="w-full pl-10 pr-4 py-2 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0a284f] focus:border-transparent"
+              />
+            </div>
+
+            <!-- Filtros por Nível/Selo -->
+            <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto p-1 bg-slate-100 rounded-lg">
+              <button data-filtro-medio="todos" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-[#0a284f] text-white transition-colors cursor-pointer whitespace-nowrap">
+                Todas
+              </button>
+              <button data-filtro-medio="ouro" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer whitespace-nowrap">
+                Selo Ouro
+              </button>
+              <button data-filtro-medio="prata" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer whitespace-nowrap">
+                Selo Prata
+              </button>
+              <button data-filtro-medio="bronze" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer whitespace-nowrap">
+                Selo Bronze
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Tabela Responsiva Médio -->
+          <div id="tabela-medio-slot"></div>
+
+          <!-- Indicador de Status da Sincronização Google Apps Script -->
+          <div class="mt-8 pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+              <i data-lucide="cloud-cog" class="w-4 h-4 text-slate-400"></i>
+              <span>Alimentação de Dados Google Planilhas:</span>
+              <div id="status-gas-badge"></div>
+            </div>
+            <div class="text-[11px] text-slate-400">
+              Código de Implantação: <code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-600 font-mono text-[10px]">AKfycbxZ_p3v2wcpM2m9n55rquwfY1PDpAde-98J_ua-K09fNHioEbFEtnhqxdKQpFbAOcewTA</code>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 8. RODAPÉ (FOOTER) -->
+    <footer class="bg-[#0a284f] text-white pt-16 pb-12 border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-700/60">
+          
+          <div class="md:col-span-5 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 flex-shrink-0">
+                <div id="selo-destaque-slot"></div>
+              </div>
+              <div>
+                <span class="text-xl font-black font-montserrat tracking-tight text-white">
+                  Edu<span class="text-[#22a267]">Susten</span>
+                </span>
+                <span class="text-[10px] block text-emerald-300 font-medium">Plataforma de Classificação Escolar</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed max-w-sm">
+              Iniciativa dedicada a transformar a sustentabilidade em métrica real e prática pedagógica nas escolas de Ensino Fundamental e Médio de todo o Brasil.
+            </p>
+            <div class="text-xs text-slate-400">
+              E-mail oficial: <a href="mailto:edususten@gmail.com" class="text-emerald-400 hover:underline">edususten@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="md:col-span-3 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#cca549]">Navegação Rápida</h4>
+            <ul class="text-xs space-y-2 text-slate-300">
+              <li><a href="#inicio" class="hover:text-emerald-400 transition-colors">Início</a></li>
+              <li><a href="#sobre" class="hover:text-emerald-400 transition-colors">Sobre o Projeto</a></li>
+              <li><a href="#categorias" class="hover:text-emerald-400 transition-colors">Indicadores & Pesos</a></li>
+              <li><a href="#formulario" class="hover:text-emerald-400 transition-colors">Formulário de Inscrição</a></li>
+              <li><a href="#ranking-fundamental" class="hover:text-emerald-400 transition-colors">Ranking Ensino Fundamental</a></li>
+              <li><a href="#ranking-medio" class="hover:text-emerald-400 transition-colors">Ranking Ensino Médio</a></li>
+            </ul>
+          </div>
+
+          <div class="md:col-span-4 space-y-4">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#cca549]">Conecte-se Conosco</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Acompanhe as novidades ecológicas, cases premiados e calendários das próximas rodadas de certificação.
+            </p>
+            <div class="flex items-center gap-3">
+              <a href="#" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#118552] flex items-center justify-center text-white transition-colors" aria-label="Instagram">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+              </a>
+              <a href="#" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#118552] flex items-center justify-center text-white transition-colors" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+              <a href="#" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#118552] flex items-center justify-center text-white transition-colors" aria-label="YouTube">
+                <i data-lucide="youtube" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:edususten@gmail.com" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#118552] flex items-center justify-center text-white transition-colors" aria-label="E-mail">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <div>
+            &copy; 2026 Edu Susten. Todos os direitos reservados.
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-emerald-400/90 font-medium">Inspirado nos princípios do UI GreenMetric</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Container dos Modais -->
+    <div id="modal-container"></div>
+
+    <!-- Script da Aplicação -->
+    <script type="module" src="/src/app.js"></script>
+
+  </body>
+</html>
