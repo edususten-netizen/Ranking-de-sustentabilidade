@@ -77,16 +77,30 @@
             <a href="#inicio" class="hover:text-[#118552] transition-colors py-2">Início</a>
             <a href="#sobre" class="hover:text-[#118552] transition-colors py-2">Sobre o Projeto</a>
             <a href="#categorias" class="hover:text-[#118552] transition-colors py-2">Categorias</a>
-            <a href="#formulario" class="hover:text-[#118552] transition-colors py-2">Formulário de Avaliação</a>
             <a href="#ranking-fundamental" class="hover:text-[#118552] transition-colors py-2">Ranking Fundamental</a>
             <a href="#ranking-medio" class="hover:text-[#118552] transition-colors py-2">Ranking Médio</a>
+            <a href="#minha-escola" class="text-[#0a284f] hover:text-[#118552] transition-colors py-2 flex items-center gap-1.5 font-bold">
+              <i data-lucide="school" class="w-3.5 h-3.5 text-[#118552]"></i>
+              <span>Minha Escola</span>
+            </a>
           </nav>
 
-          <!-- Botão de Ação -->
-          <div class="hidden sm:flex items-center gap-3">
-            <a href="#formulario" class="px-5 py-2.5 bg-[#118552] hover:bg-[#0d6b41] text-white text-xs font-bold rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-2">
-              <i data-lucide="clipboard-check" class="w-4 h-4"></i>
-              <span>Participar da Avaliação</span>
+          <!-- Autenticação Google & Ação do Usuário -->
+          <div class="hidden sm:flex items-center gap-3" id="auth-nav-slot">
+            <button 
+              onclick="abrirModalLoginGoogle()"
+              class="px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all duration-200 flex items-center gap-2 cursor-pointer">
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+              <span>Entrar com Google</span>
+            </button>
+            <a href="#minha-escola" class="px-4 py-2.5 bg-[#118552] hover:bg-[#0d6b41] text-white text-xs font-bold rounded-lg shadow-sm hover:shadow transition-all duration-200 flex items-center gap-2">
+              <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+              <span>Área da Escola</span>
             </a>
           </div>
 
@@ -104,14 +118,19 @@
         <a href="#inicio" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Início</a>
         <a href="#sobre" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Sobre o Projeto</a>
         <a href="#categorias" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Categorias</a>
-        <a href="#formulario" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Formulário de Avaliação</a>
         <a href="#ranking-fundamental" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Ranking Fundamental</a>
         <a href="#ranking-medio" class="block py-2 text-sm font-semibold text-slate-700 hover:text-[#118552]">Ranking Médio</a>
-        <div class="pt-3 border-t border-slate-100">
-          <a href="#formulario" class="w-full py-3 bg-[#118552] text-white text-center text-sm font-bold rounded-lg flex items-center justify-center gap-2">
-            <i data-lucide="clipboard-check" class="w-4 h-4"></i>
-            <span>Participar da Avaliação</span>
-          </a>
+        <a href="#minha-escola" class="block py-2 text-sm font-bold text-[#118552]">Minha Escola (Perfil & Avaliação)</a>
+        <div class="pt-3 border-t border-slate-100" id="mobile-auth-slot">
+          <button onclick="abrirModalLoginGoogle()" class="w-full py-3 bg-white border border-slate-300 text-slate-700 text-center text-sm font-bold rounded-lg flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Fazer Login com Google</span>
+          </button>
         </div>
       </div>
     </header>
@@ -139,8 +158,9 @@
 
               <!-- Botões CTA -->
               <div class="flex flex-wrap items-center gap-4 pt-2">
-                <a href="#formulario" class="px-6 py-3.5 bg-[#118552] hover:bg-[#0d6b41] text-white text-sm font-bold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-2 group">
-                  <span>Participar da Avaliação</span>
+                <a href="#minha-escola" class="px-6 py-3.5 bg-[#118552] hover:bg-[#0d6b41] text-white text-sm font-bold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-2 group">
+                  <i data-lucide="school" class="w-4 h-4"></i>
+                  <span>Minha Escola & Avaliação</span>
                   <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
                 </a>
                 <a href="#ranking-fundamental" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-[#0a284f] border border-slate-300 text-sm font-bold rounded-xl shadow-xs hover:shadow-sm transition-all flex items-center gap-2">
@@ -295,64 +315,11 @@
         </div>
       </section>
 
-      <!-- 5. ABA DO FORMULÁRIO DE AVALIAÇÃO -->
-      <section id="formulario" class="py-20 bg-white border-b border-slate-200/60">
+      <!-- 5. ÁREA RESTRITA · PERFIL DA ESCOLA & AVALIAÇÃO ("MINHA ESCOLA") -->
+      <section id="minha-escola" class="py-20 bg-white border-b border-slate-200/60 scroll-mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div class="max-w-3xl mx-auto text-center mb-12">
-            <span class="text-xs font-bold uppercase tracking-wider text-[#118552]">Inscrição & Diagnóstico Gratuito</span>
-            <h2 class="text-3xl font-extrabold text-[#0a284f] font-montserrat mt-2">
-              Formulário Oficial de Avaliação Escolar
-            </h2>
-            <p class="text-slate-600 mt-4 text-base leading-relaxed">
-              Para ingressar no Ranking Edu Susten e pleitear o Selo de Escola Sustentável, a equipe gestora ou pedagógica da escola deve preencher o questionário oficial abaixo. As respostas são auditadas para emissão do parecer.
-            </p>
-          </div>
-
-          <!-- Contêiner do Formulário Google Forms -->
-          <div class="max-w-4xl mx-auto bg-[#f8faf8] rounded-2xl border border-slate-200/80 p-4 sm:p-6 shadow-sm">
-            
-            <div class="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-200">
-              <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                <i data-lucide="file-text" class="w-4 h-4 text-[#118552]"></i>
-                <span>Questionário de Autoavaliação Edu Susten</span>
-              </div>
-              <!-- Link auxiliar em caso de preferência por tela cheia -->
-              <a 
-                href="https://docs.google.com/forms/d/e/1FAIpQLSejpWBCPQayd1a3e0SbymB-EC3N2l2xsNIVGRbnSE6I_zjkDQ/viewform?usp=publish-editor" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="text-xs font-bold text-[#118552] hover:text-[#0a284f] flex items-center gap-1.5 underline">
-                <span>Abrir questionário em nova aba</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-
-            <!-- IFRAME DO GOOGLE FORMS -->
-            <!-- 
-              LINK DO FORMULÁRIO DO GOOGLE FORMS:
-              Substitua o atributo 'src' abaixo pelo seu link definitivo de visualização pública quando desejar.
-            -->
-            <div class="relative w-full overflow-hidden rounded-xl bg-white shadow-xs border border-slate-200 min-h-[640px] sm:min-h-[720px]">
-              <iframe 
-                src="https://docs.google.com/forms/d/e/1FAIpQLSejpWBCPQayd1a3e0SbymB-EC3N2l2xsNIVGRbnSE6I_zjkDQ/viewform?embedded=true" 
-                width="100%" 
-                height="750" 
-                frameborder="0" 
-                marginheight="0" 
-                marginwidth="0"
-                class="w-full h-full min-h-[720px]"
-                title="Formulário de Avaliação Edu Susten">
-                Carregando formulário de avaliação...
-              </iframe>
-            </div>
-
-            <div class="mt-4 text-center text-xs text-slate-500">
-              Dúvidas no preenchimento? Entre em contato pelo e-mail: <strong>edususten@gmail.com</strong>
-            </div>
-
-          </div>
-
+          <!-- Renderizado dinamicamente conforme o estado de autenticação (Require Sign-In) -->
+          <div id="area-minha-escola-slot"></div>
         </div>
       </section>
 
@@ -517,7 +484,7 @@
               <li><a href="#inicio" class="hover:text-emerald-400 transition-colors">Início</a></li>
               <li><a href="#sobre" class="hover:text-emerald-400 transition-colors">Sobre o Projeto</a></li>
               <li><a href="#categorias" class="hover:text-emerald-400 transition-colors">Indicadores & Pesos</a></li>
-              <li><a href="#formulario" class="hover:text-emerald-400 transition-colors">Formulário de Inscrição</a></li>
+              <li><a href="#minha-escola" class="hover:text-emerald-400 transition-colors font-semibold text-emerald-300">Minha Escola (Perfil & Avaliação)</a></li>
               <li><a href="#ranking-fundamental" class="hover:text-emerald-400 transition-colors">Ranking Ensino Fundamental</a></li>
               <li><a href="#ranking-medio" class="hover:text-emerald-400 transition-colors">Ranking Ensino Médio</a></li>
             </ul>
